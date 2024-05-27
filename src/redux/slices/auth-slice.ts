@@ -10,7 +10,9 @@ type AuthState = {
   username: string; // 유저 닉네임
   uid: string; // id
   joinType: string;
-  isModerator: boolean; // 관리자 계정인가요?
+  admin: boolean; // 관리자 계정인가요?
+  createdAt: string;
+
 };
 
 // 로그인 되지 않은 상태
@@ -20,7 +22,8 @@ const initialState = {
     username: "",
     uid: "",
     joinType: "",
-    isModerator: false,
+    admin: false,
+    createdAt: ""
   } as AuthState,
 } as InitialState;
 
@@ -45,7 +48,8 @@ export const auth = createSlice({
           username: userData.username,
           uid: userData._id,
           joinType: userData.join_type,
-          isModerator: false,
+          admin: userData.admin,
+          createdAt:userData.created_at
         },
       };
     },
@@ -60,7 +64,8 @@ export const auth = createSlice({
             username: userData.username,
             uid: userData._id,
             joinType: userData.join_type,
-            isModerator: false,
+            admin: userData.admin,
+            createdAt:userData.created_at
           },
         };
       } else {

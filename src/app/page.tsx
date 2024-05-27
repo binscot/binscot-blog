@@ -1,11 +1,10 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
-
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import { Link } from '@nextui-org/link';
+import { Snippet } from '@nextui-org/snippet';
+import { Code } from '@nextui-org/code';
+import { button as buttonStyles } from '@nextui-org/theme';
+import { siteConfig } from '@/config/site';
+import { GithubIcon } from '@/components/icons';
+import { title, subtitle } from '@/components/primitives';
 
 export default function Home() {
   return (
@@ -14,7 +13,7 @@ export default function Home() {
         <h1 className={title()}>plz wait...</h1>
         <br />
         <h1 className={title()}>Binscot&nbsp;</h1>
-        <h1 className={title({ color: "violet" })}>making...&nbsp;</h1>
+        <h1 className={title({ color: 'violet' })}>making...&nbsp;</h1>
         <br />
       </div>
 
@@ -22,19 +21,15 @@ export default function Home() {
         <Link
           isExternal
           className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
+            color: 'primary',
+            radius: 'full',
+            variant: 'shadow'
           })}
           href={siteConfig.links.docs}
         >
           Documentation
         </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
+        <Link isExternal className={buttonStyles({ variant: 'bordered', radius: 'full' })} href={siteConfig.links.github}>
           <GithubIcon size={20} />
           GitHub
         </Link>
