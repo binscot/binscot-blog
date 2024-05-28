@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -6,22 +7,22 @@ import {
   NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
-  NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { useState } from "react";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
-import { link as linkStyles } from "@nextui-org/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
+  NavbarMenuItem
+} from '@nextui-org/navbar';
+import { useState } from 'react';
+import { Kbd } from '@nextui-org/kbd';
+import { Link } from '@nextui-org/link';
+import { Input } from '@nextui-org/input';
+import { link as linkStyles } from '@nextui-org/theme';
+import NextLink from 'next/link';
+import clsx from 'clsx';
 
-import { GithubIcon, SearchIcon, Logo } from "@/components/icons";
-import { siteConfig } from "@/config/site";
-import CustomNavItem from "./cutomNavItem";
-import { ThemeSwitch } from "./theme-switch";
+import { GithubIcon, SearchIcon, Logo } from '@/components/icons';
+import { siteConfig } from '@/config/site';
+import CustomNavItem from './cutomNavItem';
+import { ThemeSwitch } from './theme-switch';
 
-export const Navbar = () => {
+export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const togleMenu = () => {
     setIsMenuOpen(false);
@@ -31,30 +32,23 @@ export const Navbar = () => {
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
+        inputWrapper: 'bg-default-100',
+        input: 'text-sm'
       }}
       endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
+        <Kbd className="hidden lg:inline-block" keys={['command']}>
           K
         </Kbd>
       }
       labelPlacement="outside"
       placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
+      startContent={<SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />}
       type="search"
     />
   );
 
   return (
-    <NextUINavbar
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-      maxWidth="xl"
-      position="sticky"
-    >
+    <NextUINavbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -66,10 +60,7 @@ export const Navbar = () => {
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
-                )}
+                className={clsx(linkStyles({ color: 'foreground' }), 'data-[active=true]:text-primary data-[active=true]:font-medium')}
                 color="foreground"
                 href={item.href}
               >
@@ -79,14 +70,11 @@ export const Navbar = () => {
           ))}
         </ul>
       </NavbarContent>
-      
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
+
+      <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
         <CustomNavItem />
         <NavbarItem className="hidden sm:flex">{searchInput}</NavbarItem>
-       
+
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal aria-label="Github" href={siteConfig.links.github}>
             <GithubIcon className="text-default-500" />
@@ -94,9 +82,8 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
-          
+
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-      
         <Link isExternal aria-label="Github" href={siteConfig.links.github}>
           <GithubIcon className="text-default-500" />
         </Link>
@@ -108,15 +95,15 @@ export const Navbar = () => {
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item.label}-${index}`}>
+            <NavbarMenuItem key={`${item.label + index}`}>
               <NextLink href={item.href} onClick={() => togleMenu()}>
                 {item.label}
               </NextLink>
             </NavbarMenuItem>
           ))}
-          <NavbarMenuItem></NavbarMenuItem>
+          <NavbarMenuItem />
         </div>
       </NavbarMenu>
     </NextUINavbar>
   );
-};
+}

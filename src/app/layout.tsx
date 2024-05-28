@@ -7,8 +7,7 @@ import { siteConfig } from '@/config/site';
 import { fontSans } from '@/config/fonts';
 import { GithubIcon } from '@/components/icons';
 import { Navbar } from '@/components/navbar';
-
-import { Providers } from '@/providers/provider';
+import { ProvidersWrapper } from '@/providers/providerWrapper';
 
 export const metadata: Metadata = {
   title: {
@@ -33,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html suppressHydrationWarning lang="en">
       <head />
       <body className={clsx('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
+        <ProvidersWrapper themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">{children}</main>
@@ -46,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </footer>
           </div>
-        </Providers>
+        </ProvidersWrapper>
       </body>
     </html>
   );

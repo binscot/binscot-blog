@@ -1,8 +1,10 @@
-"use client";
-import { NavbarMenuToggle } from "@nextui-org/navbar";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-export const NavbarToggle = () => {
+'use client';
+
+import { NavbarMenuToggle } from '@nextui-org/navbar';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+
+export function NavbarToggle() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const togleMenu = () => {
@@ -11,4 +13,4 @@ export const NavbarToggle = () => {
   };
   console.log(pathname);
   return <NavbarMenuToggle onClick={() => togleMenu()} />;
-};
+}

@@ -4,7 +4,8 @@ import { Code } from '@nextui-org/code';
 import { button as buttonStyles } from '@nextui-org/theme';
 import { siteConfig } from '@/config/site';
 import { GithubIcon } from '@/components/icons';
-import { title, subtitle } from '@/components/primitives';
+import { title } from '@/components/primitives';
+import Count from '@/components/count';
 
 export default function Home() {
   return (
@@ -16,7 +17,9 @@ export default function Home() {
         <h1 className={title({ color: 'violet' })}>making...&nbsp;</h1>
         <br />
       </div>
-
+      <section>
+        <Count />
+      </section>
       <div className="flex gap-3">
         <Link
           isExternal
