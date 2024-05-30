@@ -9,24 +9,42 @@ import {
   NavbarItem,
   NavbarMenuItem
 } from '@nextui-org/navbar';
+import { dataFocusVisibleClasses, link as linkStyles } from '@nextui-org/theme';
+import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 import { Kbd } from '@nextui-org/kbd';
 import { Link } from '@nextui-org/link';
 import { Input } from '@nextui-org/input';
-import { link as linkStyles } from '@nextui-org/theme';
 import NextLink from 'next/link';
 import clsx from 'clsx';
-
-import { GithubIcon, SearchIcon, Logo } from '@/components/icons';
+import { GithubIcon, SearchIcon, Logo, SearchLinearIcon } from '@/components/icons';
 import { siteConfig } from '@/config/site';
+// import { useFocusRing } from '@react-aria/focus';
 import CustomNavItem from './cutomNavItem';
-import { ThemeSwitch } from './theme-switch';
+import { CustomSwitch } from './CustomSwitch';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [commandKey, setCommandKey] = useState<'ctrl' | 'command'>('command');
   const togleMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const searchButton = (
+    <Button
+      aria-label="Quick search"
+      className="text-sm font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20"
+      endContent={
+        <Kbd className="hidden py-0.5 px-2 lg:inline-block" keys={commandKey}>
+          K
+        </Kbd>
+      }
+      startContent={<SearchLinearIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" size={18} strokeWidth={2} />}
+      // onPress={}
+    >
+      Quick Search...
+    </Button>
+  );
 
   const searchInput = (
     <Input
@@ -73,22 +91,29 @@ export function Navbar() {
 
       <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
         <CustomNavItem />
-        <NavbarItem className="hidden sm:flex">{searchInput}</NavbarItem>
-
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal aria-label="Github" href={siteConfig.links.github}>
             <GithubIcon className="text-default-500" />
           </Link>
-          <ThemeSwitch />
+          <CustomSwitch />
         </NavbarItem>
+        <NavbarItem className="hidden sm:flex">{searchInput}</NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        <CustomNavItem />
         <Link isExternal aria-label="Github" href={siteConfig.links.github}>
           <GithubIcon className="text-default-500" />
         </Link>
-        <ThemeSwitch />
-        <CustomNavItem />
+        <CustomSwitch />
+        {/* <NavbarItem className="lg:flex">{searchButton}</NavbarItem> */}
+        {/* <NavbarItem className="flex h-full items-center">
+          
+        </NavbarItem> */}
+        {/* <button className="transition-opacity p-1 hover:opacity-80 rounded-full cursor-pointer outline-none">
+          
+        </button> */}
+        <SearchLinearIcon className="mt-px text-default-600 dark:text-default-500" size={20} />
         <NavbarMenuToggle />
       </NavbarContent>
 

@@ -8,6 +8,7 @@ import { fontSans } from '@/config/fonts';
 import { GithubIcon } from '@/components/icons';
 import { Navbar } from '@/components/navbar';
 import { ProvidersWrapper } from '@/providers/providerWrapper';
+import { NavbarToggle } from '@/components/navbartoggle';
 
 export const metadata: Metadata = {
   title: {
