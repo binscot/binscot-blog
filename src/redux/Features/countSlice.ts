@@ -8,7 +8,7 @@ const initialState = {
   count: 0
 } as InitialState;
 
-export const countSlice = createSlice({
+const countSlice = createSlice({
   name: 'count',
   initialState,
   reducers: {

@@ -1,5 +1,7 @@
-// 'use server';
+'use server';
 
+import { cookies } from 'next/headers';
+import { useAppSelector } from '@/redux/hooks';
 // import { cookies } from 'next/headers';
 
 /**
@@ -50,74 +52,76 @@
  * @param password The password of the user.
  */
 
-// export async function authenticateUser(username: string, password: string) {
-//   const baseURL = process.env.API_BASE_URL;
+export async function signInUser(username: string, password: string) {
+  const baseURL = process.env.API_BASE_URL;
 
-//   if (!baseURL) {
-//     console.error('API_BASE_URL is not defined.');
-//     return;
-//   }
+  if (!baseURL) {
+    console.error('API_BASE_URL is not defined.');
+    return;
+  }
 
-//   const url = `${baseURL}/api/v1/account/signin`;
-//   console.log(url);
-//   try {
-//     const response = await fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/x-www-form-urlencoded'
-//       },
-//       cache: 'no-store',
-//       body: new URLSearchParams({
-//         username,
-//         password
-//       }).toString()
-//     });
+  const url = `${baseURL}/api/v1/account/signin`;
+  console.log(url);
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      cache: 'no-store',
+      body: new URLSearchParams({
+        username,
+        password
+      }).toString()
+    });
 
-//     const responseJson = await response.json();
-//     console.log(responseJson);
-//     if (responseJson.success === true) {
-//       const accessToken = responseJson.data.token_data.access_token;
-//       const userData = responseJson.data.user_data;
-//       cookies().set('access_token', accessToken, {
-//         httpOnly: true
-//       });
-//       return userData;
-//     }
-//   } catch (error: any) {
-//     console.error(error.message);
-//   }
-//   return false;
-// }
+    const responseJson = await response.json();
+    console.log(responseJson);
+    if (responseJson.success === true) {
+      const accessToken = responseJson.data.token_data.access_token;
+      const userData = responseJson.data.user_data;
+      cookies().set('access_token', accessToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: true
+      });
+      return userData;
+    }
+  } catch (error: any) {
+    console.error(error.message);
+  }
+  return false;
+}
 
-// export async function getCurrentUser() {
-//   const baseURL = process.env.API_BASE_URL;
-//   if (!baseURL) {
-//     console.error('API_BASE_URL is not defined.');
-//     return;
-//   }
+export async function getCurrentUser(token: string) {
+  const baseURL = process.env.API_BASE_URL;
+  if (!baseURL) {
+    console.error('API_BASE_URL is not defined.');
+    return;
+  }
 
-//   const url = `${baseURL}/api/v1/account/info`;
-//   const token = cookies().get('access_token')?.value;
-//   try {
-//     const response = await fetch(url, {
-//       method: 'GET',
-//       headers: {
-//         Authorization: `bearer ${token}`
-//       },
-//       cache: 'no-store'
-//     });
+  const url = `${baseURL}/api/v1/account/info`;
+  //   const token = cookies().get('access_token')?.value;
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `bearer ${token}`
+      },
+      cache: 'no-store'
+    });
 
-//     const responseJson = await response.json();
-//     if (responseJson.success === true) {
-//       console.log(responseJson);
-//       console.log('getCurrentUser');
-//       return responseJson;
-//     }
-//   } catch (error: any) {
-//     console.error(error.message);
-//   }
-//   return false;
-// }
+    const responseJson = await response.json();
+    if (responseJson.success === true) {
+      console.log(responseJson);
+      console.log('getCurrentUser');
+      return responseJson;
+    }
+  } catch (error: any) {
+    console.error(error.message);
+  }
+  return false;
+}
 
 // export async function isSignInUser() {
 //   const accessToken = cookies().get('access_token')?.value;
@@ -128,7 +132,9 @@
  * Logs out the user.
  */
 
-// export async function signOut() {
-//   cookies().set("jwt", "", { httpOnly: true });
-//   redirect("/login");
-// }
+export async function signOutUser() {
+  // cookies().set("jwt", "", { httpOnly: true });
+  // redirect("/login");
+  cookies().delete('access_token');
+  return null;
+}

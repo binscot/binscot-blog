@@ -7,7 +7,7 @@ interface GetCallProps {
   revalidate?: number;
   cache?: any;
 }
-const apiUrl = 'https://example.com/api';
+const apiUrl = process.env.API_V1_BASE_URL;
 
 export default async function getCall(
   endpoint: GetCallProps['endpoint'],

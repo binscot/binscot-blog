@@ -2,7 +2,7 @@
 
 // for client side rendering only
 
-import { decrement, increment } from '@/redux/Features/count-slice';
+import { decrement, increment } from '@/redux/features/countSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 
 export default function Count() {
@@ -20,7 +20,6 @@ export default function Count() {
   const decrementNumber = () => {
     // for dispatching actions to decrement
     if (countValue <= 0) return;
-    console.log('1');
 
     dispatch(
       decrement({
