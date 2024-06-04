@@ -2,11 +2,13 @@
 
 import NextLink from 'next/link';
 import React, { SetStateAction, useState } from 'react';
-import { signInUser } from '@/actions/actions';
+
 import { useAppDispatch } from '@/redux/hooks';
 import { setUser } from '@/redux/features/authSlice';
 import { Button, Checkbox, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
+import { signInUser } from '@/actions/auth-action';
 import { LockIcon, MailIcon } from '../icons';
+import { modalMotionProps } from '../primitives';
 
 export default function NavbarSignIn() {
   const [error, setError] = useState<string | null>(null);
@@ -19,10 +21,10 @@ export default function NavbarSignIn() {
 
   const handleLogin = async () => {
     setSubmitting(true);
-    const user = await signInUser(username, password);
-    if (user) {
-      console.log(user);
-      dispatch(setUser(user));
+    const userInfo = await signInUser(username, password);
+    if (userInfo.isSignIn) {
+      console.log(userInfo);
+      dispatch(setUser(userInfo));
     } else {
       setError('Invalid username or password.');
       console.log(error);
@@ -37,32 +39,7 @@ export default function NavbarSignIn() {
         signIn
       </Button>
 
-      <Modal
-        backdrop="blur"
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        placement="top-center"
-        motionProps={{
-          variants: {
-            enter: {
-              y: 0,
-              opacity: 1,
-              transition: {
-                duration: 0.35,
-                ease: 'easeIn'
-              }
-            },
-            exit: {
-              y: 20,
-              opacity: 0,
-              transition: {
-                duration: 0.25,
-                ease: 'easeOut'
-              }
-            }
-          }
-        }}
-      >
+      <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center" motionProps={modalMotionProps}>
         <ModalContent>
           {(onClose) => (
             <>

@@ -1,8 +1,9 @@
+/* eslint-disable no-underscore-dangle */
+
 'use server';
 
 import { cookies } from 'next/headers';
-import { useAppSelector } from '@/redux/hooks';
-// import { cookies } from 'next/headers';
+import { UserInitialState, UserState } from '@/types';
 
 /**
  * Creates a new user
@@ -45,23 +46,15 @@ import { useAppSelector } from '@/redux/hooks';
 //   return false;
 // }
 
-/**
- * Validates the user's credentials.
- *
- * @param username The username of the user.
- * @param password The password of the user.
- */
-
-export async function signInUser(username: string, password: string) {
+export async function signInUser(username: string, password: string): Promise<UserState> {
   const baseURL = process.env.API_BASE_URL;
 
   if (!baseURL) {
     console.error('API_BASE_URL is not defined.');
-    return;
+    return UserInitialState;
   }
 
   const url = `${baseURL}/api/v1/account/signin`;
-  console.log(url);
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -76,32 +69,48 @@ export async function signInUser(username: string, password: string) {
     });
 
     const responseJson = await response.json();
-    console.log(responseJson);
     if (responseJson.success === true) {
       const accessToken = responseJson.data.token_data.access_token;
-      const userData = responseJson.data.user_data;
+      const refreshToken = responseJson.data.token_data.refresh_token;
       cookies().set('access_token', accessToken, {
         httpOnly: true,
         secure: true,
         sameSite: true
       });
-      return userData;
+      cookies().set('refresh_token', refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: true
+      });
+
+      const userData = responseJson.data.user_data;
+      const userInfo = {
+        isSignIn: true,
+        joinType: userData.join_type,
+        username: userData.username,
+        uid: userData._id,
+        isAdmin: userData.admin,
+        createdAt: userData.created_at,
+        gender: userData.gender
+      } as UserState;
+
+      return userInfo;
     }
+    return UserInitialState;
   } catch (error: any) {
     console.error(error.message);
   }
-  return false;
+  return UserInitialState;
 }
 
-export async function getCurrentUser(token: string) {
+export async function getCurrentUser(token: string): Promise<UserState> {
   const baseURL = process.env.API_BASE_URL;
   if (!baseURL) {
     console.error('API_BASE_URL is not defined.');
-    return;
+    return UserInitialState;
   }
 
   const url = `${baseURL}/api/v1/account/info`;
-  //   const token = cookies().get('access_token')?.value;
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -112,29 +121,28 @@ export async function getCurrentUser(token: string) {
     });
 
     const responseJson = await response.json();
+
     if (responseJson.success === true) {
-      console.log(responseJson);
-      console.log('getCurrentUser');
-      return responseJson;
+      const userInfo = {
+        isSignIn: true,
+        joinType: responseJson.data.join_type,
+        username: responseJson.data.username,
+        uid: responseJson.data._id,
+        isAdmin: responseJson.data.admin,
+        createdAt: responseJson.data.created_at,
+        gender: responseJson.data.gender
+      } as UserState;
+      return userInfo;
     }
+    return UserInitialState;
   } catch (error: any) {
     console.error(error.message);
   }
-  return false;
+  return UserInitialState;
 }
 
-// export async function isSignInUser() {
-//   const accessToken = cookies().get('access_token')?.value;
-//   return !!accessToken;
-// }
-
-/**
- * Logs out the user.
- */
-
 export async function signOutUser() {
-  // cookies().set("jwt", "", { httpOnly: true });
-  // redirect("/login");
   cookies().delete('access_token');
+  cookies().delete('refresh_token');
   return null;
 }

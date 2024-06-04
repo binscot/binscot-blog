@@ -1,10 +1,12 @@
-import { getCurrentUser } from '@/actions/actions';
+'use server';
+
 import { cookies } from 'next/headers';
+import { UserInitialState } from '@/types';
+import { getCurrentUser } from '@/actions/auth-action';
 import NavbarUserItem from './navbarUserItem';
 
 export default async function NavbarUser() {
   const accessToken = cookies().get('access_token');
-  const userInfo = accessToken ? await getCurrentUser(accessToken.value) : null;
-  const userInfoResponse = userInfo?.success ? userInfo.data : null;
-  return <NavbarUserItem userInfo={userInfoResponse} />;
+  const userInfo = accessToken ? await getCurrentUser(accessToken.value) : UserInitialState;
+  return <NavbarUserItem userInfo={userInfo} />;
 }

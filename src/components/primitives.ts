@@ -43,3 +43,24 @@ export const subtitle = tv({
     fullWidth: true
   }
 });
+
+export const modalMotionProps = {
+  variants: {
+    enter: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.35,
+        ease: 'easeIn'
+      }
+    },
+    exit: {
+      y: 20,
+      opacity: 0,
+      transition: {
+        duration: 0.25,
+        ease: 'easeOut'
+      }
+    }
+  }
+};
