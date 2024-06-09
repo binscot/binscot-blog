@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ProvidersWrapper themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">{children}</main>
+            <main className="container dark:bg-gray-900 mx-auto max-w-7xl pt-16 px-6 flex-grow">{children}</main>
             <footer className="w-full flex items-center justify-center py-3">
               <div className="flex flex-col items-center gap-3  py-10 text-center text-sm text-slate-500">
                 <Link isExternal aria-label="Github" href={siteConfig.links.github}>

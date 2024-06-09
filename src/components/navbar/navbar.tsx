@@ -9,7 +9,7 @@ import NavbarSwitch from './navbarSwitch';
 
 export function Navbar() {
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar className="dark:bg-gray-800" maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NavbarLogo />
