@@ -3,7 +3,7 @@
 import { clickLogo } from '@/redux/features/navSlice';
 import NextLink from 'next/link';
 import { useAppDispatch } from '@/redux/hooks';
-import { BugIcon } from '../icons';
+import { BugIcon } from '@/components/icons';
 
 export default function NavbarLogo() {
   const dispatch = useAppDispatch();

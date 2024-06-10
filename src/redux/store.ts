@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { apiSlice } from './features/api/apiSlice';
+import { apiSlice } from '@/redux/features/api/apiSlice';
 
-import navSlice from './features/navSlice';
-import countSlice from './features/countSlice';
-import authSlice from './features/authSlice';
+import navSlice from '@/redux/features/navSlice';
+import countSlice from '@/redux/features/countSlice';
+import authSlice from '@/redux/features/authSlice';
 
 export const store = configureStore({
   reducer: {

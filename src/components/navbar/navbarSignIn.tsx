@@ -7,8 +7,8 @@ import { useAppDispatch } from '@/redux/hooks';
 import { setUser } from '@/redux/features/authSlice';
 import { Button, Checkbox, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
 import { signInUser } from '@/actions/auth-action';
-import { LockIcon, MailIcon } from '../icons';
-import { modalMotionProps } from '../primitives';
+import { LockIcon, MailIcon } from '@/components/icons';
+import { modalMotionProps } from '@/components/primitives';
 
 export default function NavbarSignIn() {
   const [error, setError] = useState<string | null>(null);

@@ -3,7 +3,7 @@
 import { Switch } from '@nextui-org/switch';
 import { useIsSSR } from '@react-aria/ssr';
 import { useTheme } from 'next-themes';
-import { MoonFilledIcon, SunIcon } from '../icons';
+import { MoonFilledIcon, SunIcon } from '@/components/icons';
 
 interface NavbarThumbIconProps {
   isSelected: boolean;

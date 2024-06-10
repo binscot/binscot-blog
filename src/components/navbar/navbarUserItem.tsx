@@ -7,7 +7,7 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@nextui-o
 
 import { UserState } from '@/types';
 import { signOutUser } from '@/actions/auth-action';
-import NavbarSignIn from './navbarSignIn';
+import NavbarSignIn from '@/components/navbar/navbarSignIn';
 
 export default function NavbarUserItem({ userInfo }: { userInfo: UserState }) {
   const dispatch = useAppDispatch();

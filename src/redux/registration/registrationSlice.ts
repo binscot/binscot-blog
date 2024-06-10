@@ -1,4 +1,4 @@
-import { apiSlice } from '../features/api/apiSlice';
+import { apiSlice } from '@/redux/features/api/apiSlice';
 
 export const registrationSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

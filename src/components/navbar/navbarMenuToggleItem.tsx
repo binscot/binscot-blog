@@ -3,7 +3,6 @@
 import { Navbar as NextUINavbar, NavbarMenu, NavbarMenuToggle, NavbarMenuItem } from '@nextui-org/navbar';
 import { useEffect, useState } from 'react';
 import NextLink from 'next/link';
-import { Button } from '@nextui-org/react';
 import { siteConfig } from '@/config/site';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { clickLogo } from '@/redux/features/navSlice';

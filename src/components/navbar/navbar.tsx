@@ -1,11 +1,11 @@
 import { Navbar as NextUINavbar, NavbarContent, NavbarBrand, NavbarItem } from '@nextui-org/navbar';
 import { siteConfig } from '@/config/site';
 import NextLink from 'next/link';
-import { GithubIcon } from '../icons';
-import NavbarMenuToggleItem from './navbarMenuToggleItem';
-import NavbarLogo from './navbarLogo';
-import NavbarUser from './navbarUser';
-import NavbarSwitch from './navbarSwitch';
+import { GithubIcon } from '@/components/icons';
+import NavbarMenuToggleItem from '@/components/navbar/navbarMenuToggleItem';
+import NavbarLogo from '@/components/navbar/navbarLogo';
+import NavbarUser from '@/components/navbar/navbarUser';
+import NavbarSwitch from '@/components/navbar/navbarSwitch';
 
 export function Navbar() {
   return (

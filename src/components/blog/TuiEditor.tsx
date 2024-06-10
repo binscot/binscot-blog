@@ -10,12 +10,12 @@ import { Editor } from '@toast-ui/react-editor';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import Prism from 'prismjs';
-import { useTheme } from 'next-themes';
 
 interface Props {
   editorRef: React.RefObject<Editor>;
   images?: MutableRefObject<any>; // 글수정 시 필요
-  initialValue?: string; // 글수정 시 필요
+  initialValue: string;
+  theme?: string;
 }
 const toolbarItems = [
   ['heading', 'bold', 'italic', 'strike'],
@@ -27,18 +27,17 @@ const toolbarItems = [
   ['scrollSync']
 ];
 
-export default function TuiEditor({ editorRef, images, initialValue }: Props) {
+export default function TuiEditor({ editorRef, images, initialValue, theme }: Props) {
   const [preview, setPreview] = useState<string>(window.innerWidth > 1100 ? 'vertical' : 'tab');
-  const { theme } = useTheme();
-  const [title, setTitle] = useState('');
   const handleResize = () => {
     setPreview(window.innerWidth > 1100 ? 'vertical' : 'tab');
   };
-  const handleChange = (e: { target: { value: any } }) => {
-    const { value } = e.target;
-    setTitle(value);
-  };
+
   useEffect(() => {
+    document.querySelectorAll<HTMLElement>('.toastui-editor-defaultUI').forEach((element) => {
+      element.style.border = 'none';
+    });
+
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -46,25 +45,8 @@ export default function TuiEditor({ editorRef, images, initialValue }: Props) {
     };
   }, []);
 
-  const showContent = async () => {
-    const editorIns = editorRef?.current?.getInstance();
-    // const HTML = editorIns.getMarkdown()
-    const content = editorIns.getHTML();
-    // console.log('html', HTML)
-    console.log('title', title);
-    console.log('content', content);
-
-    const imageSize = 'style="max-width:20%"';
-    const position = content.indexOf('src');
-
-    const output = [content.slice(0, position), imageSize, content.slice(position)].join('');
-    console.log('output', output);
-    // 작성글 서버로 보내기
-  };
-
   return (
     <section className={`editor-panel-editor${theme === 'dark' ? ' toastui-editor-dark' : ''}`}>
-      <input type="text" placeholder="제목을 입력해주세요!" onChange={handleChange} />
       {editorRef && (
         <Editor
           ref={editorRef}
@@ -81,10 +63,6 @@ export default function TuiEditor({ editorRef, images, initialValue }: Props) {
           //  hooks={{ addImageBlobHook: onUploadImage }} // firebase 이미지 업로드
         />
       )}
-
-      <button type="button" onClick={showContent}>
-        저장
-      </button>
     </section>
   );
 }

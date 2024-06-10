@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { UserInitialState } from '@/types';
 import { getCurrentUser } from '@/actions/auth-action';
-import NavbarUserItem from './navbarUserItem';
+import NavbarUserItem from '@/components/navbar/navbarUserItem';
 
 export default async function NavbarUser() {
   const accessToken = cookies().get('access_token');
