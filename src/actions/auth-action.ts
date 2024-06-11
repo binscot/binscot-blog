@@ -4,6 +4,7 @@
 
 import { cookies } from 'next/headers';
 import { UserInitialState, UserState } from '@/types';
+import { sleep } from '@/utils/core';
 
 /**
  * Creates a new user
@@ -103,19 +104,22 @@ export async function signInUser(username: string, password: string): Promise<Us
   return UserInitialState;
 }
 
-export async function getCurrentUser(token: string): Promise<UserState> {
+export async function getCurrentUser(): Promise<UserState> {
+  const accessToken = cookies().get('access_token');
+  if (!accessToken) {
+    return UserInitialState;
+  }
   const baseURL = process.env.API_BASE_URL;
   if (!baseURL) {
     console.error('API_BASE_URL is not defined.');
     return UserInitialState;
   }
-
   const url = `${baseURL}/api/v1/account/info`;
   try {
     const response = await fetch(url, {
       method: 'GET',
       headers: {
-        Authorization: `bearer ${token}`
+        Authorization: `bearer ${accessToken.value}`
       },
       cache: 'no-store'
     });

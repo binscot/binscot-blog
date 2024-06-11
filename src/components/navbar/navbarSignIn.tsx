@@ -10,7 +10,7 @@ import { signInUser } from '@/actions/auth-action';
 import { LockIcon, MailIcon } from '@/components/icons';
 import { modalMotionProps } from '@/components/primitives';
 
-export default function NavbarSignIn() {
+const NavbarSignIn = () => {
   const [error, setError] = useState<string | null>(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -23,7 +23,6 @@ export default function NavbarSignIn() {
     setSubmitting(true);
     const userInfo = await signInUser(username, password);
     if (userInfo.isSignIn) {
-      console.log(userInfo);
       dispatch(setUser(userInfo));
     } else {
       setError('Invalid username or password.');
@@ -90,4 +89,5 @@ export default function NavbarSignIn() {
       </Modal>
     </>
   );
-}
+};
+export default NavbarSignIn;

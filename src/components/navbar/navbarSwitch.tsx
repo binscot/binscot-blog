@@ -10,12 +10,12 @@ interface NavbarThumbIconProps {
   className?: string;
 }
 
-function NavbarThumbIcon({ isSelected, className }: NavbarThumbIconProps) {
+const NavbarThumbIcon = ({ isSelected, className }: NavbarThumbIconProps) => {
   const isSSR = useIsSSR();
   return isSelected || isSSR ? <MoonFilledIcon className={className} size={14} /> : <SunIcon className={className} />;
-}
+};
 
-export default function NavbarSwitch() {
+const NavbarSwitch = () => {
   const { theme, setTheme } = useTheme();
   const isSSR = useIsSSR();
   return (
@@ -26,4 +26,5 @@ export default function NavbarSwitch() {
       thumbIcon={NavbarThumbIcon}
     />
   );
-}
+};
+export default NavbarSwitch;

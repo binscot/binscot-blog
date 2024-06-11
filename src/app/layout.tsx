@@ -6,8 +6,9 @@ import clsx from 'clsx';
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/config/fonts';
 import { ProvidersWrapper } from '@/providers/providerWrapper';
-import { Navbar } from '@/components/navbar/navbar';
+
 import { GithubIcon } from '@/components/icons';
+import Navbar from '@/components/navbar/navbar';
 
 export const metadata: Metadata = {
   title: {
