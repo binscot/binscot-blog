@@ -5,8 +5,7 @@ import { NextUIProvider } from '@nextui-org/system';
 import { useRouter } from 'next/navigation';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ThemeProviderProps } from 'next-themes/dist/types';
-import { store } from '@/redux/store';
-import { Provider } from 'react-redux';
+import StoreProvider from './storeProvider';
 
 export interface ProvidersWrapperProps {
   children: React.ReactNode;
@@ -19,7 +18,7 @@ export function ProvidersWrapper({ children, themeProps }: ProvidersWrapperProps
   return (
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider {...themeProps}>
-        <Provider store={store}>{children}</Provider>;
+        <StoreProvider>{children}</StoreProvider>;
       </NextThemesProvider>
     </NextUIProvider>
   );

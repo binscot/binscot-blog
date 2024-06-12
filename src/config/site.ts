@@ -6,29 +6,45 @@ export const siteConfig = {
   navItems: [
     {
       label: 'Blog',
-      href: '/blog'
+      href: '/blog',
+      isAdmin: false
     },
     {
       label: 'Project',
-      href: '/project'
+      href: '/project',
+      isAdmin: false
     },
     {
       label: 'Icon...',
-      href: '/icons'
+      href: '/icons',
+      isAdmin: false
+    },
+    {
+      label: 'WriteBlog',
+      href: '/blog/write',
+      isAdmin: true
     }
   ],
   navMenuItems: [
     {
       label: 'Blog',
-      href: '/blog'
+      href: '/blog',
+      isAdmin: false
     },
     {
       label: 'Project',
-      href: '/project'
+      href: '/project',
+      isAdmin: false
     },
     {
       label: 'Icon...',
-      href: '/icons'
+      href: '/icons',
+      isAdmin: false
+    },
+    {
+      label: 'WriteBlog',
+      href: '/blog/write',
+      isAdmin: true
     }
   ],
   links: {

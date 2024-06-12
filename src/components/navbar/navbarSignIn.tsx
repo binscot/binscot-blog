@@ -3,12 +3,12 @@
 import NextLink from 'next/link';
 import React, { SetStateAction, useState } from 'react';
 
-import { useAppDispatch } from '@/redux/hooks';
-import { setUser } from '@/redux/features/authSlice';
+import { setUser } from '@/store/features/authSlice';
 import { Button, Checkbox, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
 import { signInUser } from '@/actions/auth-action';
 import { LockIcon, MailIcon } from '@/components/icons';
 import { modalMotionProps } from '@/components/primitives';
+import { useAppDispatch } from '@/store/hooks';
 
 const NavbarSignIn = () => {
   const [error, setError] = useState<string | null>(null);

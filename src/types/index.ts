@@ -1,7 +1,7 @@
 import { SVGProps } from 'react';
 
 export type FuncDropdownMenu = (key: string) => void;
-
+export type ToggleMenuFn = (setType?: boolean | undefined) => void;
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };

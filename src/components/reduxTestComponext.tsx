@@ -1,8 +1,8 @@
 'use client';
 
-import { useAppSelector } from '@/redux/hooks';
 import { useEffect, useState } from 'react';
 import { title } from './primitives';
+import { useAppSelector } from '@/store/hooks';
 
 export default function ReduxTestComponext() {
   const userInfo = useAppSelector((state) => state.authSlice.value);

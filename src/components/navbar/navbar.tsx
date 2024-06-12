@@ -6,38 +6,16 @@ import NavbarSwitch from '@/components/navbar/navbarSwitch';
 import { useState, useEffect } from 'react';
 import NextLink from 'next/link';
 import { siteConfig } from '@/config/site';
-import { setUser } from '@/redux/features/authSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import NavbarAuthArea from './navbarAuthArea';
-import { UserInitialState } from '@/types';
-import { getCurrentUser } from '@/actions/auth-action';
+import { UserState } from '@/types';
 import NavbarVerticalItem from '@/components/navbar/navbarVerticalItem';
 import NavbarHorizontalItem from '@/components/navbar/navbarHorizontalItem';
 
-const Navbar = () => {
+const Navbar = ({ userInfo }: { userInfo: UserState }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = (setType?: boolean | undefined) => {
     setIsMenuOpen(typeof setType === 'boolean' ? setType : !isMenuOpen);
   };
-  const dispatch = useAppDispatch();
-  const storeUserInfo = useAppSelector((state) => state.authSlice.value);
-  const [userInfo, setUserInfo] = useState(UserInitialState);
-
-  const setCurrentUser = async () => {
-    const currentUserInfo = await getCurrentUser();
-    if (currentUserInfo.isSignIn) {
-      dispatch(setUser(currentUserInfo));
-      setUserInfo(currentUserInfo);
-    }
-  };
-  useEffect(() => {
-    if (!userInfo.isSignIn && !storeUserInfo.isSignIn) {
-      setCurrentUser();
-    }
-    if (userInfo.isSignIn !== storeUserInfo.isSignIn) {
-      setUserInfo(storeUserInfo);
-    }
-  }, [storeUserInfo]);
 
   return (
     <NextUINavbar isMenuOpen={isMenuOpen} className="dark:bg-gray-800" maxWidth="xl" position="sticky">

@@ -2,8 +2,8 @@
 
 // for client side rendering only
 
-import { decrement, increment } from '@/redux/features/countSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { decrement, increment } from '@/store/features/countSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 export default function Count() {
   const dispatch = useAppDispatch(); // for dispatching actions
